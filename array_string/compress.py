@@ -10,7 +10,7 @@ def compress(s):
     >>> compress(s='ccaaatsss')
     '2c3at3s'
     """
-    compressed_str = ""
+    compressed_lst = []
     s += '*'
     i, j = 0, 0
     while j < len(s):
@@ -19,6 +19,6 @@ def compress(s):
         else:
             times = j - i
             char = s[i]
-            compressed_str += str(times) + char if times > 1 else char
+            compressed_lst.append(str(times) + char if times > 1 else char)
             i = j
-    return compressed_str
+    return ''.join(compressed_lst)
