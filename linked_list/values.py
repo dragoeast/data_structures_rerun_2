@@ -3,6 +3,21 @@ class Node:
         self.val = val
         self.next = next
 
+def get_values_iterative(head):
+    """Return a list of the values in the linked list.
+    This implementation is iterative.
+    >>> get_values_iterative(head=None)
+    []
+    >>> get_values_iterative(head=Node('a', Node('b', Node('c'))))
+    ['a', 'b', 'c']
+    """
+    values = []
+    curr = head
+    while curr is not None:
+        values.append(curr.val)
+        curr = curr.next
+
+    return values
 
 def get_values(head):
     """Return a list of the values in the linked list.
