@@ -3,7 +3,7 @@ class Node:
         self.val = val
         self.next = next
 
-def get_values_iterative(head):
+def get_values_iterative(head: Node) -> list:
     """Return a list of the values in the linked list.
     This implementation is iterative.
     >>> get_values_iterative(head=None)
@@ -19,7 +19,7 @@ def get_values_iterative(head):
 
     return values
 
-def get_values(head):
+def get_values(head: Node) -> list:
     """Return a list of the values in the linked list.
     >>> get_values(head=None)
     []
@@ -31,7 +31,7 @@ def get_values(head):
 
     return values
 
-def _get_values(head, values):
+def _get_values(head: Node, values: list) -> None:
     """Recursive helper function to update the values list 
     while stepping through the linked list."""
     if head is None:
