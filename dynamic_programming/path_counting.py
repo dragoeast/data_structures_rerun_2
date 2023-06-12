@@ -7,20 +7,29 @@ def count_paths(grid):
         ]
     >>> count_paths(grid)
     2
+    >>> grid = [ [ 'O' for _ in range(15) ] for _ in range(15) ]
+    >>> count_paths(grid)
+    40116600
     """
-    return _count_paths(grid, row=0, col=0)
+    return _count_paths(grid, row=0, col=0, memo={})
 
 
-def _count_paths(grid, row, col):
+def _count_paths(grid, row, col, memo):
+    position = (row, col)
+    key = position
+    if key in memo:
+        return memo[key]
+
     if not _inbound(grid, row, col) or _wall(grid, row, col):
         return 0
     if _bottom_right(grid, row, col):
         return 1
 
-    down_count = _count_paths(grid, row+1, col)
-    right_count = _count_paths(grid, row, col+1)
+    down_count = _count_paths(grid, row+1, col, memo)
+    right_count = _count_paths(grid, row, col+1, memo)
 
-    return down_count + right_count
+    memo[key] = down_count + right_count
+    return memo[key]
 
 
 def _inbound(grid, row, col):
