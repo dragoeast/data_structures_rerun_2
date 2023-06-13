@@ -8,20 +8,29 @@ def max_path_sum(grid):
     ]
     >>> max_path_sum(grid)
     18
+    >>> grid = [ [1 for _ in range(15)] for _ in range(20) ]
+    >>> max_path_sum(grid)
+    34
     """
-    return _max_path_sum(grid, row=0, col=0)
+    return _max_path_sum(grid, row=0, col=0, memo={})
 
 
-def _max_path_sum(grid, row, col):
+def _max_path_sum(grid, row, col, memo):
+    position = (row, col)
+    key = position
+    if key in memo:
+        return memo[key]
+
     if not _inbound(grid, row, col):
         return 0
     if _bottom_right(grid, row, col):
         return grid[row][col]
 
-    down_path_sum = _max_path_sum(grid, row+1, col)
-    right_path_sum = _max_path_sum(grid, row, col+1)
+    down_path_sum = _max_path_sum(grid, row+1, col, memo)
+    right_path_sum = _max_path_sum(grid, row, col+1, memo)
 
-    return grid[row][col] + max(down_path_sum, right_path_sum)
+    memo[key] = grid[row][col] + max(down_path_sum, right_path_sum)
+    return memo[key]
 
 
 def _inbound(grid, row, col):
